@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>折柱图</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <script src="js/echarts.min.js"></script>
+        <script src="js/jquery.js"></script>
+        <!-- 引入 dark 主题 -->
+        <!-- <script src="dark .js"></script> -->
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+        </style>
+    </head>
+    <body>
+          <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+        <div id="main" style="width: 900px;height:300px;color:#000"></div>
+    </body>
+    </html>
+    <script>
+        var myChart= echarts.init(document.getElementById('main'), 'dark')
+        var colors = ['#b5e3fd', '#b5e3fd', '#b5e3fd'];
+            option= {
+            color: colors,
+            title: {
+                        // text: '本年收入与用户量',
+                        // subtext: '总收入：4470万元',
+                        // x:'left',
+                        left:'center',
+                     textStyle: {
+                         fontWeight: "normal",              //标题颜色
+                         // color: "#b5e3fd",
+                         fontSize:"11"
+                         },
+                    },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {type: 'cross'}
+            },
+            grid: {
+                right: '15%',
+                left:'15%',
+                bottom:'20%'
+            },
+            legend: {
+                data:[{name:'出账收入',textStyle:{color:"#000"}},
+                {name: "降水量",textStyle:{color:"#b5e3fd"}},
+                {name:'用户量',textStyle:{color:"#000"}}],
+                x : 'center',
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    data: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+                    // 控制网格线是否显示
+                            splitLine: {
+                                    show: false,
+                                    //  改变轴线颜色
+                                    lineStyle: {
+                                        // 使用深浅的间隔色
+                                        color: ['#b5e3fd']
+                                    }                            
+                            },
+                            //  改变x轴颜色
+                            axisLine:{
+                                // show: false,
+                                lineStyle:{
+                                    color:'#b5e3fd',
+                                    //width:8,
+                                    //这里是为了突出显示加上的，可以去掉
+                                }
+                            },                         
+                            //  改变x轴字体颜色和大小
+                            axisLabel: {
+                                textStyle: {
+                                    color: '#000',
+                                    fontSize:'11'
+                                },
+                            },      
+                },
+
+            ],
+            yAxis: [
+                {
+                    // show:false,
+                    type: 'value',
+                    name: '出账收入',
+                    min: 0,
+                    max: 2400,
+                    position: 'right',
+                    splitLine: {
+                                    show: false,
+                                    //  改变轴线颜色
+                                    lineStyle: {
+                                        // 使用深浅的间隔色
+                                        color: ['#b5e3fd']
+                                    }                            
+                            },
+                    axisLine: {
+                        lineStyle: {
+                            color: colors[0]
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 万元',
+                        textStyle: {
+                                    color: '#000',
+                                    fontSize:'11'
+                                },
+                    },
+                },
+                {
+                    show:false,
+                    type: 'value',
+                    name: '降水量',
+                    min: 0,
+                    max: 250,
+                    position: 'left',
+                    offset: 80,
+                    splitLine: {
+                            show: false,
+                            //  改变轴线颜色
+                            lineStyle: {
+                                // 使用深浅的间隔色
+                                color: ['#b5e3fd']
+                            }                            
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: "rgba(1,1,1,0)"
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '',
+                        textStyle: {
+                                    color: "rgba(1,1,1,0)",
+                                    fontSize:'0'
+                                },
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '用户量',
+                    min: 0,
+                    max: 600,
+                    position: 'left',
+                    splitLine: {
+                                    show: false,
+                                    //  改变轴线颜色
+                                    lineStyle: {
+                                        // 使用深浅的间隔色
+                                        color: ['#b5e3fd']
+                                    }                            
+                            },
+                    axisLine: {
+                        lineStyle: {
+                            color: colors[2]
+                        }
+                    },
+                    axisLabel: {
+                        formatter: '{value} 万人',
+                        textStyle: {
+                                    color: '#000',
+                                    fontSize:'11'
+                                },
+                    }
+                }
+            ],
+            series: [
+                {
+                    name:'出账收入',
+                    type:'bar',
+                    data:[613.58,472.79,667.14,787.22,785.05,815.20,954.53,1432.53,432.53,632.53,732.53,1132.53],
+                    barWidth: 20,
+                        itemStyle: {
+                            emphasis: {
+                                barBorderRadius: 4
+                            },
+                            // normal: {
+                            //     barBorderRadius: 4,
+                            //     color: '#0E90CD'
+                            // }
+                            normal: {
+                                 
+                                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        // color: 'rgba(17, 168,171, 1)'
+                                        color: 'rgba(87, 147,243, 1)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(17, 168,171, 0.1)'
+                                    }]),
+                                    shadowColor: 'rgba(0, 0, 0, 0.1)',
+                                    shadowBlur: 10
+                                }
+                            }
+                },
+                {
+                    name:'用户量',
+                    type:'line',
+                    yAxisIndex: 2,
+                    itemStyle: {
+                            normal: {color: '#ffd85c'}
+                    },
+                    data:[322.53,321.37,385.74,288.06,461.76,493.32,514.49,555.71,233.34,455.64,533.56,133.44]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+
+ 
